@@ -1,34 +1,15 @@
-export const ADD_PRODUCT = "counter/ADD_PRODUCT";
-export const REMOVE_PRODUCT = "counter/REMOVE_PRODUCT";
-export const CLEAR_PRODUCT = "counter/CLEAR_PRODUCT";
+export const ADD_DATA_TO_STORE = "counter/ADD_DATA_TO_STORE";
 
 const initialState = {
-  count: 0,
+  data: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ADD_PRODUCT:
+    case ADD_DATA_TO_STORE:
       return {
         ...state,
-        count: state.count + 1,
-      };
-    case REMOVE_PRODUCT:
-      if (state.count >= 1) {
-        return {
-          ...state,
-          count: state.count - 1,
-        };
-      } else {
-        return {
-          ...state,
-          count: 0,
-        };
-      }
-    case CLEAR_PRODUCT:
-      return {
-        ...state,
-        count: 0,
+        data: action.data,
       };
 
     default:
@@ -36,26 +17,11 @@ export default (state = initialState, action) => {
   }
 };
 
-export const addProduct = () => {
+export const addDataToStore = (data) => {
   return (dispatch) => {
     dispatch({
-      type: ADD_PRODUCT,
-    });
-  };
-};
-
-export const removeProduct = () => {
-  return (dispatch) => {
-    dispatch({
-      type: REMOVE_PRODUCT,
-    });
-  };
-};
-
-export const clearProduct = () => {
-  return (dispatch) => {
-    dispatch({
-      type: CLEAR_PRODUCT,
+      type: ADD_DATA_TO_STORE,
+      data: data,
     });
   };
 };

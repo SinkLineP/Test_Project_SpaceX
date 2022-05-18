@@ -1,42 +1,37 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { addProduct, clearProduct, removeProduct } from "../../modules/counter";
+import { addDataToStore } from "../../modules/counter";
 import PropTypes from "prop-types";
 
 const Home = (props) => {
-  const { count, addProduct, removeProduct, clearProduct } = props;
-
+  const { data } = props;
   return (
     <div>
-      <h1>Home</h1>
-      <p>Product counts: {count};</p>
-      <button onClick={addProduct}>Add Product</button>
-      <button onClick={removeProduct}>Remove Product</button>
-      <button onClick={clearProduct}>Clear Products</button>
+      <h1>
+        Home:
+        {data.length !== 0 ? data.map((e) => e.name + "; ") : "Loading..."}
+      </h1>
+      <button>Add Product</button>
     </div>
   );
 };
 
-Home.propTypes = {
-  count: PropTypes.number,
-  addProduct: PropTypes.func,
-  removeProduct: PropTypes.func,
-  clearProduct: PropTypes.func,
-};
-
 const mapStateToProps = ({ counter }) => ({
-  count: counter.count,
+  data: counter.data,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addProduct,
-      removeProduct,
-      clearProduct,
+      addDataToStore,
     },
     dispatch
   );
+
+Home.propTypes = {
+  addDataToStore: PropTypes.any,
+  data: PropTypes.any,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
