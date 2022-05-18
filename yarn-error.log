@@ -1,0 +1,65 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add redux react-redux redux-thunk history redux-devtools-extension
+
+PATH: 
+  /home/sinkiline/.local/bin:/home/sinkiline/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  16.14.2
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: write EPROTO 139988133578688:error:1416C095:SSL routines:tls_process_finished:digest check failed:../deps/openssl/openssl/ssl/statem/statem_lib.c:848:
+  
+      at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16)
+
+npm manifest: 
+  {
+    "name": "test_project_spacex",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "@testing-library/jest-dom": "^5.16.4",
+      "@testing-library/react": "^13.2.0",
+      "@testing-library/user-event": "^13.5.0",
+      "react": "^18.1.0",
+      "react-dom": "^18.1.0",
+      "react-scripts": "5.0.1",
+      "web-vitals": "^2.1.4"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+      "extends": [
+        "react-app",
+        "react-app/jest"
+      ]
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
