@@ -3,20 +3,22 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { addDataToStore } from "../../modules/counter";
 import PropTypes from "prop-types";
+import EarthLogo from "./Images/earth-logo.png";
+import "./Styles/index.scss";
+import Table from "../Table/Table";
 
-const Home = (props) => {
-  const { data } = props;
+const Home = () => {
   return (
     <div>
-      <h1>
-        Home:
-        {data.length !== 0 ? data.map((e) => e.name + "; ") : "Loading..."}
-      </h1>
-      <button>Add Product</button>
+      <p className={"title"}>
+        Explore the space{" "}
+        <img src={EarthLogo} alt={"Earth"} className={"logo-earth"} />
+      </p>
+      <Table />
     </div>
   );
 };
-
+// {data.length !== 0 ? data.map((e) => e.name + "; ") : "Loading..."}
 const mapStateToProps = ({ counter }) => ({
   data: counter.data,
 });

@@ -2,6 +2,7 @@ export const ADD_DATA_TO_STORE = "counter/ADD_DATA_TO_STORE";
 
 const initialState = {
   data: [],
+  countColumns: 3,
 };
 
 export default (state = initialState, action) => {
