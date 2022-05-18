@@ -5,7 +5,7 @@ import { addDataToStore } from "../../modules/counter";
 import PropTypes from "prop-types";
 import EarthLogo from "./Images/earth-logo.png";
 import "./Styles/index.scss";
-import Table from "../Table/Table";
+import DaDTable from "../DaDTable/DaDTable";
 
 const Home = () => {
   return (
@@ -14,7 +14,7 @@ const Home = () => {
         Explore the space{" "}
         <img src={EarthLogo} alt={"Earth"} className={"logo-earth"} />
       </p>
-      <Table />
+      <DaDTable />
     </div>
   );
 };
