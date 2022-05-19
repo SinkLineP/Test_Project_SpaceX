@@ -1,4 +1,5 @@
 export const ADD_DATA_TO_STORE = "counter/ADD_DATA_TO_STORE";
+export const SHOW_MODAL = "counter/SHOW_MODAL";
 
 const initialState = {
   data: [],

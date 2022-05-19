@@ -1,3 +1,5 @@
+$fontZillaSlab: 'Zilla Slab', serif;
+
 * {
   padding: 0;
   margin: 0;
@@ -25,8 +27,10 @@
 }
 
 .board__title {
+  font-family: $fontZillaSlab;
   font-size: 1.5rem;
   font-weight: 700;
+  color: gray;
 }
 
 .item {
@@ -39,10 +43,7 @@
   background-color: #fcfcf9;
 }
 
-//.item:hover {
-//  cursor: grab;
-//}
-
+//show Alert message
 .show-message-false {
   opacity: 0;
   visibility: hidden;
@@ -54,3 +55,17 @@
   visibility: visible;
   transition: .20s opacity, .20s visibility;
 }
+
+//show Modal confirm
+.show-modal-false {
+  opacity: 0;
+  visibility: hidden;
+  transition: .55s opacity, .55s visibility;
+}
+
+.show-modal-true {
+  opacity: 1;
+  visibility: visible;
+  transition: .20s opacity, .20s visibility;
+}
+

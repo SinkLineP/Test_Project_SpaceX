@@ -1,0 +1,46 @@
+$fontZillaSlab: 'Zilla Slab', serif;
+$colorWhite: #002f00;
+$fontBold: 700;
+
+.modal {
+  background-color: #4e9f9f;
+  width: 500px;
+  height: 130px;
+  position: absolute;
+  border-radius: 10px;
+  padding: 10px;
+  left: 35%;
+  top: 35%;
+}
+
+.btn-ok {
+  background-color: aqua;
+  width: 100px;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-weight: $fontBold;
+}
+
+.btn-ok:hover {
+  background-color: rgba(0, 217, 255, 0.64);
+}
+
+.shadow {
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
+}
+
+.modal-title {
+  font-family: $fontZillaSlab;
+  font-weight: $fontBold;
+  font-size: 20px;
+  color: $colorWhite;
+}
+
+.modal-content {
+  font-family: $fontZillaSlab;
+  font-weight: $fontBold;
+  font-size: 17px;
+  color: $colorWhite;
+}

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { addDataToStore } from "../../modules/counter";
 import PropTypes from "prop-types";
 import "./Styles/index.scss";
 import SuccessMessage from "../SuccessMessage/SuccessMessage";
+import ModalWindow from "../ModalWindow/ModalWindow";
 
 const DaDTable = (props) => {
   const { data } = props;
@@ -36,6 +36,7 @@ const DaDTable = (props) => {
   const [currentItem, setCurrentItem] = useState(null);
   const [drugg, isDraggable] = useState(true);
   const [message, isMessage] = useState(false);
+  const [modal, isModal] = useState(false);
 
   function dragOverHandler(e) {
     e.preventDefault();
@@ -73,6 +74,9 @@ const DaDTable = (props) => {
             if (b.id === 3) {
               AlertSuccess();
             }
+            if (b.id === 2) {
+              showModal();
+            }
             return board;
           }
           if (b.id === currentBoard.id) {
@@ -102,6 +106,9 @@ const DaDTable = (props) => {
             if (b.id === 3) {
               AlertSuccess();
             }
+            if (b.id === 2) {
+              showModal();
+            }
             return board;
           }
           if (b.id === currentBoard.id) {
@@ -111,6 +118,9 @@ const DaDTable = (props) => {
         })
       );
     }
+    // if (board.id === 2) {
+    //   board[0].items.push(currentItem);
+    // }
   }
 
   function draggable(e) {
@@ -122,8 +132,19 @@ const DaDTable = (props) => {
     }
   }
 
+  function showModal() {
+    isModal(true);
+  }
+
+  function callbackModal(props) {
+    isModal(props);
+  }
+
   return (
     <>
+      <div className={"show-modal-" + modal}>
+        <ModalWindow cbModal={(e) => callbackModal(e)} item={modal} />
+      </div>
       <div className={"show-message-" + message}>
         <SuccessMessage
           title={"Success!"}
@@ -174,16 +195,9 @@ const mapStateToProps = ({ counter }) => ({
   data: counter.data,
 });
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      addDataToStore,
-    },
-    dispatch
-  );
+const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 
 DaDTable.propTypes = {
-  addDataToStore: PropTypes.any,
   data: PropTypes.any,
 };
 
