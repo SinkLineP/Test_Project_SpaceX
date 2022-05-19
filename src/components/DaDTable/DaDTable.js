@@ -37,24 +37,16 @@ const DaDTable = (props) => {
 
   function dragOverHandler(e) {
     e.preventDefault();
-    // console.log("drag Over Handler");
     if (e.target.className === "item") {
       e.target.style.boxShadow = "0 4px 3px gray";
     }
   }
 
   function dragLeaveHandler(e) {
-    console.log("drag leave handler");
     e.target.style.boxShadow = "none";
   }
 
   function dragStartHandler(e, board, item) {
-    console.log("drag start handler");
-    console.log(e);
-    console.log(board);
-    console.log(item);
-    console.log("===============");
-
     if (board.id !== 1) {
       setCurrentBoard(board);
       setCurrentItem(item);
@@ -62,12 +54,10 @@ const DaDTable = (props) => {
   }
 
   function dragEndHandler(e) {
-    console.log("drag end handler");
     e.target.style.boxShadow = "none";
   }
 
   function dropHandler(e, board, item) {
-    console.log("drop handler");
     e.preventDefault();
     e.stopPropagation();
     if (board.id !== 1) {
@@ -90,7 +80,6 @@ const DaDTable = (props) => {
   }
 
   function dropCardHandler(e, board) {
-    console.log("drop card handler");
     if (board.id !== 1) {
       board.items.push(currentItem);
       const currentIndex = currentBoard.items.indexOf(currentItem);
@@ -112,10 +101,8 @@ const DaDTable = (props) => {
   function draggable(e) {
     const targetExtendBoard = e.target.id;
     if (targetExtendBoard === "1") {
-      console.log("drugg: false");
       isDraggable(false);
     } else {
-      console.log("drugg: true");
       isDraggable(true);
     }
   }
