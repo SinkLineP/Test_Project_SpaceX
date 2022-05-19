@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { addDataToStore } from "../../modules/counter";
 import PropTypes from "prop-types";
 import "./Styles/index.scss";
+import SuccessMessage from "../SuccessMessage/SuccessMessage";
 
 const DaDTable = (props) => {
   const { data } = props;
@@ -34,6 +35,7 @@ const DaDTable = (props) => {
   const [currentBoard, setCurrentBoard] = useState(null);
   const [currentItem, setCurrentItem] = useState(null);
   const [drugg, isDraggable] = useState(true);
+  const [message, isMessage] = useState(false);
 
   function dragOverHandler(e) {
     e.preventDefault();
@@ -68,6 +70,9 @@ const DaDTable = (props) => {
       setBoards(
         boards.map((b) => {
           if (b.id === board.id) {
+            if (b.id === 3) {
+              AlertSuccess();
+            }
             return board;
           }
           if (b.id === currentBoard.id) {
@@ -79,6 +84,13 @@ const DaDTable = (props) => {
     }
   }
 
+  function AlertSuccess() {
+    isMessage(true);
+    setTimeout(() => {
+      isMessage(false);
+    }, 3000);
+  }
+
   function dropCardHandler(e, board) {
     if (board.id !== 1) {
       board.items.push(currentItem);
@@ -87,6 +99,9 @@ const DaDTable = (props) => {
       setBoards(
         boards.map((b) => {
           if (b.id === board.id) {
+            if (b.id === 3) {
+              AlertSuccess();
+            }
             return board;
           }
           if (b.id === currentBoard.id) {
@@ -108,42 +123,50 @@ const DaDTable = (props) => {
   }
 
   return (
-    <div className={"app"}>
-      {boards.map((board, key) => (
-        <div
-          id={board.id}
-          key={key}
-          className={"board"}
-          onDragOver={(e) => dragOverHandler(e)}
-          onDrop={(e) => dropCardHandler(e, board)}
-          onMouseOver={(e) => draggable(e)}
-        >
-          <div id={board.id} className={"board__title"}>
-            {board.title}
-          </div>
-          {board.items.map((item, key) => {
-            item.extendBoard = board.id;
+    <>
+      <div className={"show-message-" + message}>
+        <SuccessMessage
+          title={"Success!"}
+          content={"Launch added to My Launch"}
+        />
+      </div>
+      <div className={"app"}>
+        {boards.map((board, key) => (
+          <div
+            id={board.id}
+            key={key}
+            className={"board"}
+            onDragOver={(e) => dragOverHandler(e)}
+            onDrop={(e) => dropCardHandler(e, board)}
+            onMouseOver={(e) => draggable(e)}
+          >
+            <div id={board.id} className={"board__title"}>
+              {board.title}
+            </div>
+            {board.items.map((item, key) => {
+              item.extendBoard = board.id;
 
-            return (
-              <div
-                id={item.extendBoard}
-                onDragOver={(e) => dragOverHandler(e)}
-                onDragLeave={(e) => dragLeaveHandler(e)}
-                onDragStart={(e) => dragStartHandler(e, board, item)}
-                onDragEnd={(e) => dragEndHandler(e)}
-                onDrop={(e) => dropHandler(e, board, item)}
-                key={key}
-                className={"item"}
-                draggable={drugg}
-              >
-                <b id={item.extendBoard}>{item.title}</b>
-                <p id={item.extendBoard}>{item.desc}</p>
-              </div>
-            );
-          })}
-        </div>
-      ))}
-    </div>
+              return (
+                <div
+                  id={item.extendBoard}
+                  onDragOver={(e) => dragOverHandler(e)}
+                  onDragLeave={(e) => dragLeaveHandler(e)}
+                  onDragStart={(e) => dragStartHandler(e, board, item)}
+                  onDragEnd={(e) => dragEndHandler(e)}
+                  onDrop={(e) => dropHandler(e, board, item)}
+                  key={key}
+                  className={"item"}
+                  draggable={drugg}
+                >
+                  <b id={item.extendBoard}>{item.title}</b>
+                  <p id={item.extendBoard}>{item.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 

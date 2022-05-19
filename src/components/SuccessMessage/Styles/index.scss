@@ -1,0 +1,21 @@
+$colorWhite: green;
+$colorGreen: #d4edda;
+$tenPX: 10px;
+
+.message {
+  background-color: $colorGreen;
+  width: 20vw;
+  height: 85px;
+  border-radius: $tenPX;
+  padding: $tenPX;
+  box-shadow: 0 0 4px 4px white inset;
+  margin: 0 10px 0 auto;
+
+  .label {
+    color: $colorWhite;
+  }
+
+  .content {
+    color: $colorWhite;
+  }
+}

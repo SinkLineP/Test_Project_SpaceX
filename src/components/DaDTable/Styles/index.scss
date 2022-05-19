@@ -42,3 +42,15 @@
 //.item:hover {
 //  cursor: grab;
 //}
+
+.show-message-false {
+  opacity: 0;
+  visibility: hidden;
+  transition: .55s opacity, .55s visibility;
+}
+
+.show-message-true {
+  opacity: 1;
+  visibility: visible;
+  transition: .20s opacity, .20s visibility;
+}
