@@ -13,10 +13,14 @@ const DaDTable = (props) => {
     { id: 3, title: "My Launches", items: [] },
   ]);
   const twentyFlights = data.slice(0, 10);
-  if (boards[0].items.length === 0) {
+  if (
+    boards[0].items.length === 0 &&
+    boards[1].items.length === 0 &&
+    boards[2].items.length === 0
+  ) {
     let id = 1;
     twentyFlights.map((e) => {
-      boards[0].items.push({
+      boards[1].items.push({
         id: id,
         title: e.name,
         desc: "Falcon " + id,
@@ -34,9 +38,11 @@ const DaDTable = (props) => {
       e.target.style.boxShadow = "0 4px 3px gray";
     }
   }
+
   function dragLeaveHandler(e) {
     e.target.style.boxShadow = "none";
   }
+
   function dragStartHandler(e, board, item) {
     setCurrentBoard(board);
     setCurrentItem(item);
@@ -45,8 +51,10 @@ const DaDTable = (props) => {
   function dragEndHandler(e) {
     e.target.style.boxShadow = "none";
   }
+
   function dropHandler(e, board, item) {
     e.preventDefault();
+    e.stopPropagation();
     const currentIndex = currentBoard.items.indexOf(currentItem);
     currentBoard.items.splice(currentIndex, 1);
     const dropIndex = board.items.indexOf(item);
@@ -102,8 +110,8 @@ const DaDTable = (props) => {
               className={"item"}
               draggable={true}
             >
-              {item.title}
-              {/*<p>{item.desc}</p>*/}
+              <b>{item.title}</b>
+              <p>{item.desc}</p>
             </div>
           ))}
         </div>
