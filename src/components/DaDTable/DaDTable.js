@@ -86,6 +86,9 @@ const DaDTable = (props) => {
         })
       );
     }
+    if (board.id === 3) {
+      boards[0].items.push(currentItem);
+    }
   }
 
   function AlertSuccess() {
@@ -118,9 +121,9 @@ const DaDTable = (props) => {
         })
       );
     }
-    // if (board.id === 2) {
-    //   board[0].items.push(currentItem);
-    // }
+    if (board.id === 3) {
+      boards[0].items.push(currentItem);
+    }
   }
 
   function draggable(e) {
