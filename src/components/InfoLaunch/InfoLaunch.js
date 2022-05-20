@@ -1,22 +1,44 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import "./Styles/index.scss";
+//redux
+import { useSelector } from "react-redux";
 
-const InfoLaunch = (props) => {
-  const { title, desc } = props;
+const InfoLaunch = () => {
+  const paramsURL = useParams();
+
+  function isItems(launch) {
+    return Number(launch.itemID) === Number(paramsURL.itemID);
+  }
+
+  const oneLaunch = useSelector((state) => state.counter.data?.find(isItems));
+
+  if (!oneLaunch) {
+    return <h2>Launch not found!</h2>;
+  }
 
   return (
     <>
-      <Link to="/">Go to Home page</Link>
-      <p>Title: {title}</p>
-      <p>Description: {desc}</p>
+      <div className={"card-launch"}>
+        <div className={"link-block"}>
+          <Link to="/" className={"card-link"}>
+            Go to Home page
+          </Link>
+        </div>
+        <p className={"card-title"}>
+          Title: <span>{oneLaunch.title}</span>
+        </p>
+        <p className={"card-desc"}>
+          Description: <span>{oneLaunch.desc}</span>
+        </p>
+      </div>
     </>
   );
 };
 
 InfoLaunch.propTypes = {
-  title: PropTypes.any,
-  desc: PropTypes.any,
+  data: PropTypes.any,
 };
 
 export default InfoLaunch;

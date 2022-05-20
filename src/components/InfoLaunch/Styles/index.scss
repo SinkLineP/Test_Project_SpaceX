@@ -1,0 +1,37 @@
+.card-launch {
+  background-color: #fdfde9;
+  padding: 10px;
+  border: 1px solid lightgray;
+  width: 30vw;
+  height: auto;
+  margin: 40px auto 0 auto;
+}
+
+.link-block {
+  margin-bottom: 20px;
+}
+
+.card-link {
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 5px;
+  background-color: #c4fd91;
+  color: black;
+}
+
+.card-link:hover {
+  background-color: #b3f578;
+}
+
+.card-link:active {
+  background-color: #a5ef63;
+}
+
+span {
+  font-weight: normal;
+}
+
+p {
+  font-weight: bold;
+}

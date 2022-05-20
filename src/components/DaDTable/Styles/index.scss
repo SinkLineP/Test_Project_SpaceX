@@ -70,3 +70,24 @@ $fontZillaSlab: 'Zilla Slab', serif;
   transition: .20s opacity, .20s visibility;
 }
 
+//link
+.link-block-info {
+  margin-top: 10px;
+}
+
+.info-link {
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 5px;
+  background-color: #c4fd91;
+  color: black;
+}
+
+.info-link:hover {
+  background-color: #b3f578;
+}
+
+.info-link:active {
+  background-color: #a5ef63;
+}

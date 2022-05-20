@@ -26,7 +26,9 @@ const App = (props) => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/info-launch" element={<InfoLaunch />} />
+        <Route path="/info-launch">
+          <Route path=":itemID" element={<InfoLaunch />} />
+        </Route>
       </Routes>
     </>
   );

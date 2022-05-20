@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import "./Styles/index.scss";
 import SuccessMessage from "../SuccessMessage/SuccessMessage";
 import ModalWindow from "../ModalWindow/ModalWindow";
-import InfoLaunch from "../InfoLaunch/InfoLaunch";
 import { Link } from "react-router-dom";
+import { setExtendBoard } from "../../modules/counter";
 
 const DaDTable = (props) => {
   const { data } = props;
@@ -162,6 +162,7 @@ const DaDTable = (props) => {
               {board.title}
             </div>
             {board.items.map((item, key) => {
+              // setExtendBoard(Number(board.id));
               item.extendBoard = board.id;
 
               return (
@@ -178,7 +179,14 @@ const DaDTable = (props) => {
                 >
                   <b id={item.extendBoard}>{item.title}</b>
                   <p id={item.extendBoard}>{item.desc}</p>
-                  <Link to="/info-launch/">open this launch</Link>
+                  <div className={"link-block-info"}>
+                    <Link
+                      to={`/info-launch/${item.itemID}`}
+                      className={"info-link"}
+                    >
+                      more...
+                    </Link>
+                  </div>
                 </div>
               );
             })}
@@ -193,7 +201,13 @@ const mapStateToProps = ({ counter }) => ({
   data: counter.data,
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      setExtendBoard,
+    },
+    dispatch
+  );
 
 DaDTable.propTypes = {
   data: PropTypes.any,
