@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import "./Styles/index.scss";
 import SuccessMessage from "../SuccessMessage/SuccessMessage";
 import ModalWindow from "../ModalWindow/ModalWindow";
+import InfoLaunch from "../InfoLaunch/InfoLaunch";
+import { Link } from "react-router-dom";
 
 const DaDTable = (props) => {
   const { data } = props;
@@ -19,16 +21,8 @@ const DaDTable = (props) => {
     boards[1].items.length === 0 &&
     boards[2].items.length === 0
   ) {
-    let id = 1;
     countFlights.map((e) => {
-      boards[1].items.push({
-        id: id,
-        type: "launch",
-        extendBoard: 0,
-        title: e.name,
-        desc: "Falcon " + id,
-      });
-      id++;
+      boards[1].items.push(e);
     });
   }
 
@@ -184,6 +178,7 @@ const DaDTable = (props) => {
                 >
                   <b id={item.extendBoard}>{item.title}</b>
                   <p id={item.extendBoard}>{item.desc}</p>
+                  <Link to="/info-launch/">open this launch</Link>
                 </div>
               );
             })}
