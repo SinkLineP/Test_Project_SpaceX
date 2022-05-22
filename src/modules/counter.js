@@ -1,40 +1,27 @@
-export const ADD_DATA_TO_STORE = "counter/ADD_DATA_TO_STORE";
-export const SET_EXTEND_BOARD = "counter/SET_EXTEND_BOARD";
+export const SET_BOARDS = "counter/SET_BOARDS";
 
 const initialState = {
-  data: [],
+  boardStore: [
+    { id: 1, type: "board", title: "Past Launches", items: [] },
+    { id: 2, type: "board", title: "Launches", items: [] },
+    { id: 3, type: "board", title: "My Launches", items: [] },
+  ],
 };
 
 export default (state = initialState, action) => {
   let actionData = action.data;
   let itemID = 1;
   switch (action.type) {
-    case ADD_DATA_TO_STORE:
-      actionData.map((item) => {
-        //make option
-        item.make = "itemID";
-        item.make = "desc";
-        item.make = "title";
-        item.make = "extendBoard";
-        //set option
-        item.itemID = itemID;
-        item.desc = "Falcon" + itemID;
-        item.title = item.name;
-        item.extendBoard = 0;
-        itemID++;
-      });
+    case SET_BOARDS:
       return {
         ...state,
-        data: actionData,
-      };
-    case SET_EXTEND_BOARD:
-      console.log(action.setExtendBoard);
-      actionData.map((item) => {
-        item.extendBoard = action.setExtendBoard;
-      });
-      return {
-        ...state,
-        data: actionData,
+        boardStore: [
+          ...state.boardStore.map((board) =>
+            board.id === action.boardStore.index
+              ? { ...board, items: action.boardStore.content }
+              : board
+          ),
+        ],
       };
 
     default:
@@ -42,20 +29,11 @@ export default (state = initialState, action) => {
   }
 };
 
-export const addDataToStore = (data) => {
+export const setBoardStore = (boardStore) => {
   return (dispatch) => {
     dispatch({
-      type: ADD_DATA_TO_STORE,
-      data: data,
-    });
-  };
-};
-
-export const setExtendBoard = (current) => {
-  return (dispatch) => {
-    dispatch({
-      type: SET_EXTEND_BOARD,
-      setExtendBoard: current,
+      type: SET_BOARDS,
+      boardStore: boardStore,
     });
   };
 };

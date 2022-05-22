@@ -5,18 +5,32 @@ import "./App.css";
 //redux
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { addDataToStore } from "./modules/counter";
+import { setBoardStore } from "./modules/counter";
 //Routes
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home.js";
 import InfoLaunch from "./components/InfoLaunch/InfoLaunch";
 
 const App = (props) => {
-  const { addDataToStore } = props;
+  const { setBoardStore } = props;
   useEffect(() => {
     async function fetchData() {
+      let itemID = 1;
       await axios.get("https://api.spacexdata.com/v4/launches").then((res) => {
-        addDataToStore(res.data);
+        let newArray = res.data;
+
+        newArray.map((item) => {
+          item.itemID = itemID;
+          item.desc = "Falcon" + itemID;
+          item.title = item.name;
+          item.extendBoard = 0;
+          itemID++;
+        });
+
+        setBoardStore({
+          index: 2,
+          content: newArray.slice(0, 10),
+        });
       });
     }
     fetchData().then((r) => r);
@@ -34,21 +48,18 @@ const App = (props) => {
   );
 };
 
-const mapStateToProps = ({ counter }) => ({
-  data: counter.data,
-});
+const mapStateToProps = ({ counter }) => ({});
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addDataToStore,
+      setBoardStore,
     },
     dispatch
   );
 
 App.propTypes = {
-  addDataToStore: PropTypes.any,
-  data: PropTypes.any,
+  setBoardStore: PropTypes.any,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

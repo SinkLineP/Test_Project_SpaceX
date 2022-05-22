@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -6,25 +6,10 @@ import "./Styles/index.scss";
 import SuccessMessage from "../SuccessMessage/SuccessMessage";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import { Link } from "react-router-dom";
-import { setExtendBoard } from "../../modules/counter";
+import { setBoardStore } from "../../modules/counter";
 
 const DaDTable = (props) => {
-  const { data } = props;
-  const [boards, setBoards] = useState([
-    { id: 1, type: "board", title: "Past Launches", items: [] },
-    { id: 2, type: "board", title: "Launches", items: [] },
-    { id: 3, type: "board", title: "My Launches", items: [] },
-  ]);
-  const countFlights = data.slice(0, 10);
-  if (
-    boards[0].items.length === 0 &&
-    boards[1].items.length === 0 &&
-    boards[2].items.length === 0
-  ) {
-    countFlights.map((e) => {
-      boards[1].items.push(e);
-    });
-  }
+  const { setBoardStore, boardStore } = props;
 
   const [currentBoard, setCurrentBoard] = useState(null);
   const [currentItem, setCurrentItem] = useState(null);
@@ -62,8 +47,8 @@ const DaDTable = (props) => {
       currentBoard.items.splice(currentIndex, 1);
       const dropIndex = board.items.indexOf(item);
       board.items.splice(dropIndex + 1, 0, currentItem);
-      setBoards(
-        boards.map((b) => {
+      setBoardStore(
+        boardStore.map((b) => {
           if (b.id === board.id) {
             if (b.id === 3) {
               AlertSuccess();
@@ -81,7 +66,7 @@ const DaDTable = (props) => {
       );
     }
     if (board.id === 3) {
-      boards[0].items.push(currentItem);
+      boardStore[0].items.push(currentItem);
     }
   }
 
@@ -97,8 +82,8 @@ const DaDTable = (props) => {
       board.items.push(currentItem);
       const currentIndex = currentBoard.items.indexOf(currentItem);
       currentBoard.items.splice(currentIndex, 1);
-      setBoards(
-        boards.map((b) => {
+      setBoardStore(
+        boardStore.map((b) => {
           if (b.id === board.id) {
             if (b.id === 3) {
               AlertSuccess();
@@ -116,7 +101,7 @@ const DaDTable = (props) => {
       );
     }
     if (board.id === 3) {
-      boards[0].items.push(currentItem);
+      boardStore[0].items.push(currentItem);
     }
   }
 
@@ -149,7 +134,7 @@ const DaDTable = (props) => {
         />
       </div>
       <div className={"app"}>
-        {boards.map((board, key) => (
+        {boardStore.map((board, key) => (
           <div
             id={board.id}
             key={key}
@@ -162,7 +147,6 @@ const DaDTable = (props) => {
               {board.title}
             </div>
             {board.items.map((item, key) => {
-              // setExtendBoard(Number(board.id));
               item.extendBoard = board.id;
 
               return (
@@ -198,18 +182,21 @@ const DaDTable = (props) => {
 };
 
 const mapStateToProps = ({ counter }) => ({
+  boardStore: counter.boardStore,
   data: counter.data,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      setExtendBoard,
+      setBoardStore,
     },
     dispatch
   );
 
 DaDTable.propTypes = {
+  setBoardStore: PropTypes.any,
+  boardStore: PropTypes.any,
   data: PropTypes.any,
 };
 

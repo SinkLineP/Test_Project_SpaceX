@@ -26,11 +26,14 @@ const InfoLaunch = () => {
             Go to Home page
           </Link>
         </div>
-        <p className={"card-title"}>
+        <p>
           Title: <span>{oneLaunch.title}</span>
         </p>
-        <p className={"card-desc"}>
+        <p>
           Description: <span>{oneLaunch.desc}</span>
+        </p>
+        <p>
+          Extend Board: <span>{oneLaunch.extendBoard}</span>
         </p>
       </div>
     </>
