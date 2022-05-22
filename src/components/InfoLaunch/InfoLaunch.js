@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import "./Styles/index.scss";
@@ -8,13 +8,13 @@ import axios from "axios";
 
 const InfoLaunch = () => {
   const paramsURL = useParams();
-  let newArray;
+  const [launches, setLaunches] = useState();
 
   useEffect(() => {
     async function fetchData() {
       let itemID = 1;
       await axios.get("https://api.spacexdata.com/v4/launches").then((res) => {
-        newArray = res.data;
+        let newArray = res.data;
 
         newArray.map((item) => {
           item.itemID = itemID;
@@ -25,6 +25,7 @@ const InfoLaunch = () => {
         });
 
         newArray.slice(1, 10);
+        setLaunches(newArray);
       });
     }
     fetchData().then((r) => r);
@@ -34,9 +35,8 @@ const InfoLaunch = () => {
     return Number(launch.itemID) === Number(paramsURL.itemID);
   }
 
-  const oneLaunch = useSelector((state) =>
-    state.counter.boardStore[0].items?.find(isItems)
-  );
+  const oneLaunch = launches?.find(isItems);
+  console.log(oneLaunch);
 
   const twoLaunch = useSelector((state) =>
     state.counter.boardStore[1].items?.find(isItems)
@@ -49,10 +49,6 @@ const InfoLaunch = () => {
   if (!oneLaunch) {
     return <h2>Launch not found!</h2>;
   }
-
-  console.log(oneLaunch);
-  console.log(twoLaunch);
-  console.log(threeLaunch);
 
   return (
     <>
@@ -69,14 +65,6 @@ const InfoLaunch = () => {
         <p>
           Description:{" "}
           <span>{oneLaunch.desc || twoLaunch.desc || threeLaunch.desc}</span>
-        </p>
-        <p>
-          Extend Board:{" "}
-          <span>
-            {oneLaunch.extendBoard ||
-              twoLaunch.extendBoard ||
-              threeLaunch.extendBoard}
-          </span>
         </p>
       </div>
     </>
