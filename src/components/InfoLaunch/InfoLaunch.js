@@ -18,7 +18,7 @@ const InfoLaunch = () => {
 
         newArray.map((item) => {
           item.itemID = itemID;
-          item.desc = "Falcon" + itemID;
+          item.desc = "Falcon-" + itemID;
           item.title = item.name;
           item.extendBoard = 0;
           itemID++;
@@ -36,15 +36,6 @@ const InfoLaunch = () => {
   }
 
   const oneLaunch = launches?.find(isItems);
-  console.log(oneLaunch);
-
-  const twoLaunch = useSelector((state) =>
-    state.counter.boardStore[1].items?.find(isItems)
-  );
-
-  const threeLaunch = useSelector((state) =>
-    state.counter.boardStore[2].items?.find(isItems)
-  );
 
   if (!oneLaunch) {
     return <h2>Launch not found!</h2>;
@@ -59,12 +50,14 @@ const InfoLaunch = () => {
           </Link>
         </div>
         <p>
-          Title:{" "}
-          <span>{oneLaunch.title || twoLaunch.title || threeLaunch.title}</span>
+          Title: <span>{oneLaunch.title}</span>
         </p>
         <p>
-          Description:{" "}
-          <span>{oneLaunch.desc || twoLaunch.desc || threeLaunch.desc}</span>
+          Description: <span>{oneLaunch.desc}</span>
+        </p>
+        <p>
+          Details:{" "}
+          <span>{oneLaunch.details ? oneLaunch.details : "no details"}</span>
         </p>
       </div>
     </>

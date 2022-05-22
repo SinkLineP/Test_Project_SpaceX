@@ -21,7 +21,7 @@ const App = (props) => {
 
         newArray.map((item) => {
           item.itemID = itemID;
-          item.desc = "Falcon" + itemID;
+          item.desc = "Falcon-" + itemID;
           item.title = item.name;
           item.extendBoard = 0;
           itemID++;
