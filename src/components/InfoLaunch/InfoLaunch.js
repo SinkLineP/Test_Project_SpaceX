@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./Styles/index.scss";
-//redux
-import { useSelector } from "react-redux";
 import axios from "axios";
 
-const InfoLaunch = () => {
+const InfoLaunch = (props) => {
   const paramsURL = useParams();
   const [launches, setLaunches] = useState();
 
@@ -62,10 +59,6 @@ const InfoLaunch = () => {
       </div>
     </>
   );
-};
-
-InfoLaunch.propTypes = {
-  data: PropTypes.any,
 };
 
 export default InfoLaunch;

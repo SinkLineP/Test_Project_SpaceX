@@ -48,7 +48,9 @@ const App = (props) => {
   );
 };
 
-const mapStateToProps = ({ counter }) => ({});
+const mapStateToProps = ({ counter }) => ({
+  allLaunches: counter.allLaunches,
+});
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

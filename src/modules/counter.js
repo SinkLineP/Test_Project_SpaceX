@@ -1,4 +1,5 @@
 export const SET_BOARDS = "counter/SET_BOARDS";
+export const ALL_LAUNCHES = "counter/ALL_LAUNCHES";
 
 const initialState = {
   boardStore: [
@@ -9,8 +10,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  let actionData = action.data;
-  let itemID = 1;
   switch (action.type) {
     case SET_BOARDS:
       return {
